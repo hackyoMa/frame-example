@@ -1,13 +1,13 @@
 <template>
     <div>
-        <el-row>
-            <el-col :offset="8" :span="8" style="text-align: center;">
+        <el-row justify="center" type="flex">
+            <el-col :lg="8" :md="10" :sm="16" :xl="8" :xs="22" style="text-align: center;">
                 <img alt="logo" src="@/assets/images/logo347x74@2x.png" style="width: 347px;height: 74px;margin: 36px 0 18px 0;"/>
-                <p style="color:#909399;font-size: 18px;">用最好的时光，看一场电影吧。 - 时光驿站</p>
+                <p style="color:#909399;font-size: 18px;">便捷开发框架</p>
             </el-col>
         </el-row>
-        <el-row style="margin-top: 18px;">
-            <el-col :offset="8" :span="8">
+        <el-row justify="center" style="margin-top: 18px;" type="flex">
+            <el-col :lg="8" :md="8" :sm="15" :xl="8" :xs="22">
                 <el-tabs :stretch="true" type="border-card" v-model="activeName">
                     <el-tab-pane label="登录" name="login">
                         <el-form :model="loginForm" :rules="loginRules" ref="loginForm" status-icon style="margin-top: 22px;">
@@ -198,21 +198,26 @@
                     password: this.loginForm.password
                 }).then((response) => {
                     if (response.data['status'] === 'success') {
-                        this.$message.success('登录成功');
                         if (this.loginForm.remember) {
                             localStorage.setItem('token', response.data['token']);
                         } else {
                             sessionStorage.setItem('token', response.data['token']);
                         }
                         this.$http.defaults.headers.common['Authorization'] = response.data['token'];
-                        this.$refs['loginForm'].resetFields();
-                        const redirect = this.$route.query['redirect'];
-                        console.log(redirect);
-                        if (redirect !== undefined && redirect !== null && redirect !== '') {
-                            this.$router.push(redirect + '');
-                        } else {
-                            this.$router.push('/');
-                        }
+                        this.$store.commit('setLoginStatus', true);
+                        this.$http.get('/user').then((response) => {
+                            this.$store.commit('setUser', response.data);
+                            this.$message.success('登录成功');
+                            this.$refs['loginForm'].resetFields();
+                            const redirect = this.$route.query['redirect'];
+                            if (redirect !== undefined && redirect !== null && redirect !== '') {
+                                this.$router.push(redirect + '');
+                            } else {
+                                this.$router.push('/');
+                            }
+                        }).catch((error) => {
+                            this.$message.error(error.message);
+                        });
                     } else {
                         this.$message.warning('用户名或密码错误');
                         this.$refs['loginForm'].clearValidate();

@@ -1,16 +1,16 @@
 import axios from "axios";
 import router from './router'
+import store from './store'
 
 const http = axios.create({
     baseURL: process.env.VUE_APP_BASE_API_URL
 });
 
-http.interceptors.response.use(function (response) {
+http.interceptors.response.use((response) => {
     return response;
-}, function (error) {
+}, (error) => {
     if (error.response.status === 401) {
-        localStorage.removeItem('token');
-        sessionStorage.removeItem('token');
+        store.commit('setLoginStatus', false);
         router.push({
             path: '/login',
             query: {redirect: router.app._route.path}
