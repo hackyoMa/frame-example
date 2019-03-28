@@ -8,8 +8,6 @@ import UserInfo from './views/user/UserInfo.vue'
 Vue.use(Router);
 
 const router = new Router({
-    mode: 'history',
-    base: process.env.BASE_URL,
     routes: [
         {
             path: '/',
