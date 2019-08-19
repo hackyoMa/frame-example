@@ -16,7 +16,7 @@ import java.util.List;
  * @version V1.0.0
  */
 @ControllerAdvice
-public class GloablExceptionHandler {
+public class GlobalExceptionHandler {
 
     /**
      * 处理参数异常

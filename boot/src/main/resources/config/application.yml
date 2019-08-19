@@ -25,7 +25,7 @@ spring:
       ddl-auto: update
     database: mysql
     generate-ddl: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQL57Dialect
     open-in-view: false
 security.whitelist:
   post: /user,/user/_login,/user/_check-username-exists

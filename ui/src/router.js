@@ -1,9 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import {Message} from 'element-ui'
-import Home from './views/Home.vue'
-import Login from './views/Login.vue'
-import UserInfo from './views/user/UserInfo.vue'
 
 Vue.use(Router);
 
@@ -13,19 +10,19 @@ const router = new Router({
             path: '/',
             name: 'home',
             meta: {requiresAuth: false},
-            component: Home
+            component: () => import('./views/Home.vue')
         },
         {
             path: '/login',
             name: 'login',
             meta: {requiresAuth: false},
-            component: Login
+            component: () => import('./views/Login.vue')
         },
         {
             path: '/user/info',
             name: 'userInfo',
             meta: {requiresAuth: true},
-            component: UserInfo
+            component: () => import('./views/user/UserInfo.vue')
         }
     ]
 });

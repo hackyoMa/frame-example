@@ -5,7 +5,7 @@
 基于：java、mysql、spring boot2.1.x、vue-cli3.x
 
 依赖：
-> * jdk1.8、jdk11测试通过，通过修改根目录下pom文件中java.version即可
+> * jdk8、jdk11测试通过，通过修改根目录下pom文件中java.version即可
 > * 数据库mysql8、mysql5.7测试通过，通过修改spring boot配置文件中spring.jpa.database-platform即可
 > * 首次运行需要在启动后向数据库导入脚本，core/src/main/resources/import.sql
 
