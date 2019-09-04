@@ -12,10 +12,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableTransactionManagement
-public class FrameApplication {
+public class BootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FrameApplication.class, args);
+        SpringApplication.run(BootApplication.class, args);
     }
 
 }
