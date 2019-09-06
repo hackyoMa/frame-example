@@ -20,6 +20,6 @@
 使用：
 > * 后端配置文件在boot/resources/config/
 > * 前端配置文件在ui/.env.development、ui/.env.production，分别对应npm的server和build环境
-> * 如需添加上下文，需要同时在application.yml、vue.config.js、.env.development、.env.production四个文件中添加上下文路径
+> * 如需修改或删除上下文，需要同时修改application.yml、vue.config.js、.env.development、.env.production四个文件中的配置
 > * 前端在ui/下先执行npm install，然后再执行npm run server或npm run build即可
 > * 后端运行boot/java/cn/spicybar/frame/BootApplication文件
