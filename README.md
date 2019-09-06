@@ -6,8 +6,8 @@
 
 依赖：
 > * jdk8、jdk11测试通过，通过修改根目录下pom文件中java.version即可
-> * 多数据库支持，通过修改spring boot配置文件中spring.jpa.database-platform、spring.jpa.database，以及修改pom中的jdbc依赖即可
-> * 首次运行需要在启动后向数据库导入脚本，core/resources/import.sql
+> * 多数据库支持，通过修改pom.xml中的jdbc依赖，以及application.yml文件中spring.datasource.driver-class-name、spring.jpa.database-platform、spring.jpa.database即可
+> * 首次运行样例需要在启动后向数据库导入脚本，core/resources/import.sql
 
 特性：
 > * 前后端可分离部署，也可合并打包。合并打包需先在前端执行npm run build
@@ -20,6 +20,6 @@
 使用：
 > * 后端配置文件在boot/resources/config/
 > * 前端配置文件在ui/.env.development、ui/.env.production，分别对应npm的server和build环境
-> * 前端上下文配置在ui/vue.config.js中
-> * 拉取代码，在ui/下运行：npm install，idea导入maven项目即可。
-> * 后端运行boot/java/cn/spicybar/frame/FrameApplication文件，前端在ui/下运行npm run server或npm run build
+> * 如需添加上下文，需要同时在application.yml、vue.config.js、.env.development、.env.production四个文件中添加上下文路径
+> * 前端在ui/下先执行npm install，然后再执行npm run server或npm run build即可
+> * 后端运行boot/java/cn/spicybar/frame/BootApplication文件
