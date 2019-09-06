@@ -1,5 +1,5 @@
 module.exports = {
-    publicPath: '/',
+    publicPath: '/frame',
     productionSourceMap: false,
     devServer: {
         port: 8070,

@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /
+    context-path: /frame
 spring:
   profiles:
     active: dev
