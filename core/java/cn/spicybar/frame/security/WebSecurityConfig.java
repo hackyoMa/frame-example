@@ -61,6 +61,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().cors().and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/").permitAll()
+                .antMatchers(HttpMethod.GET, "/**/*.css", "/**/*.js", "/**/*.htm", "/**/*.html",
+                        "/**/*.xhtml", "/**/*.woff", "/**/*.woff2", "/**/*.ttf",
+                        "/**/*.tif", "/**/*.tiff", "/**/*.svg", "/**/*.png",
+                        "/**/*.jpg", "/**/*.jpeg", "/**/*.gif", "/**/*.ico",
+                        "/**/*.webp", "/**/*.swf", "/**/*.pdf", "/**/*.mp3",
+                        "/**/*.wav", "/**/*.avi").permitAll()
                 .antMatchers(HttpMethod.POST, postWhitelist).permitAll()
                 .anyRequest().authenticated()
                 .and().headers().cacheControl();
