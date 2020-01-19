@@ -6,8 +6,8 @@ import http from './http'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(ElementUI);
 Vue.config.productionTip = false;
+Vue.use(ElementUI);
 Vue.prototype.$http = http;
 
 new Vue({

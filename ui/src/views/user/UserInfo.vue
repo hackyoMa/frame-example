@@ -5,22 +5,22 @@
                 <el-tab-pane label="个人信息" name="userInfo">
                     <el-form :model="userInfoFrom" :rules="userInfoRules" ref="userInfoFrom" status-icon style="margin-top: 22px;">
                         <el-form-item prop="username">
-                            <el-input auto-complete="on" clearable disabled="disabled" placeholder="请输入邮箱或手机号" type="text" v-model="userInfoFrom.username"></el-input>
+                            <el-input auto-complete="on" clearable disabled="disabled" placeholder="请输入邮箱或手机号" type="text" v-model="userInfoFrom.username"/>
                         </el-form-item>
                         <el-form-item prop="nickname">
-                            <el-input auto-complete="on" clearable placeholder="请输入要修改的昵称" type="text" v-model="userInfoFrom.nickname"></el-input>
+                            <el-input auto-complete="on" clearable placeholder="请输入要修改的昵称" type="text" v-model="userInfoFrom.nickname"/>
                         </el-form-item>
                         <el-form-item prop="modifyPassword" style="text-align: center;">
-                            <el-switch active-text="修改密码" inactive-text="不修改密码" v-model="modifyPassword"></el-switch>
+                            <el-switch active-text="修改密码" inactive-text="不修改密码" v-model="modifyPassword"/>
                         </el-form-item>
                         <el-form-item prop="sourcePassword" v-if="modifyPassword">
-                            <el-input auto-complete="off" clearable placeholder="请输入原密码" type="password" v-model="userInfoFrom.sourcePassword"></el-input>
+                            <el-input auto-complete="off" clearable placeholder="请输入原密码" type="password" v-model="userInfoFrom.sourcePassword"/>
                         </el-form-item>
                         <el-form-item prop="password" v-if="modifyPassword">
-                            <el-input auto-complete="off" clearable placeholder="请输入新密码" type="password" v-model="userInfoFrom.password"></el-input>
+                            <el-input auto-complete="off" clearable placeholder="请输入新密码" type="password" v-model="userInfoFrom.password"/>
                         </el-form-item>
                         <el-form-item prop="checkPassword" v-if="modifyPassword">
-                            <el-input auto-complete="off" clearable placeholder="请再次输入新密码" type="password" v-model="userInfoFrom.checkPassword"></el-input>
+                            <el-input auto-complete="off" clearable placeholder="请再次输入新密码" type="password" v-model="userInfoFrom.checkPassword"/>
                         </el-form-item>
                         <el-form-item>
                             <el-button @click="submitForm('userInfoFrom')" style="width: 100%;" type="primary">保存修改</el-button>

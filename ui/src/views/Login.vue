@@ -12,10 +12,10 @@
                     <el-tab-pane label="登录" name="login">
                         <el-form :model="loginForm" :rules="loginRules" ref="loginForm" status-icon style="margin-top: 22px;">
                             <el-form-item prop="username">
-                                <el-input auto-complete="on" clearable placeholder="请输入邮箱或手机号" type="text" v-model="loginForm.username"></el-input>
+                                <el-input auto-complete="on" clearable placeholder="请输入邮箱或手机号" type="text" v-model="loginForm.username"/>
                             </el-form-item>
                             <el-form-item prop="password">
-                                <el-input @keyup.enter.native="submitForm('loginForm')" auto-complete="off" clearable placeholder="请输入密码" type="password" v-model="loginForm.password"></el-input>
+                                <el-input @keyup.enter.native="submitForm('loginForm')" auto-complete="off" clearable placeholder="请输入密码" type="password" v-model="loginForm.password"/>
                             </el-form-item>
                             <el-form-item prop="remember" style="text-align: center">
                                 <el-checkbox v-model="loginForm.remember">保持登录状态</el-checkbox>
@@ -28,16 +28,16 @@
                     <el-tab-pane label="注册" name="registered">
                         <el-form :model="regForm" :rules="regRules" ref="regForm" status-icon style="margin-top: 22px;">
                             <el-form-item prop="username">
-                                <el-input auto-complete="on" clearable placeholder="请输入注册邮箱或手机号" type="text" v-model="regForm.username"></el-input>
+                                <el-input auto-complete="on" clearable placeholder="请输入注册邮箱或手机号" type="text" v-model="regForm.username"/>
                             </el-form-item>
                             <el-form-item prop="nickname">
-                                <el-input auto-complete="on" clearable placeholder="请输入昵称" type="text" v-model="regForm.nickname"></el-input>
+                                <el-input auto-complete="on" clearable placeholder="请输入昵称" type="text" v-model="regForm.nickname"/>
                             </el-form-item>
                             <el-form-item prop="password">
-                                <el-input auto-complete="off" clearable placeholder="请设置密码" type="password" v-model="regForm.password"></el-input>
+                                <el-input auto-complete="off" clearable placeholder="请设置密码" type="password" v-model="regForm.password"/>
                             </el-form-item>
                             <el-form-item prop="checkPassword">
-                                <el-input @keyup.enter.native="submitForm('regForm')" auto-complete="off" clearable placeholder="请再次输入密码" type="password" v-model="regForm.checkPassword"></el-input>
+                                <el-input @keyup.enter.native="submitForm('regForm')" auto-complete="off" clearable placeholder="请再次输入密码" type="password" v-model="regForm.checkPassword"/>
                             </el-form-item>
                             <el-form-item>
                                 <el-button @click="submitForm('regForm')" style="width: 100%;" type="primary">注册</el-button>
@@ -47,7 +47,7 @@
                 </el-tabs>
             </el-col>
         </el-row>
-        <Particles></Particles>
+        <Particles/>
     </div>
 </template>
 

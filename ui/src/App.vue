@@ -1,10 +1,10 @@
 <template>
     <el-container v-if="isRouterAlive">
         <el-header>
-            <Menu></Menu>
+            <Menu/>
         </el-header>
         <el-main>
-            <router-view></router-view>
+            <router-view/>
         </el-main>
     </el-container>
 </template>

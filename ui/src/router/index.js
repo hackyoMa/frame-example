@@ -1,30 +1,32 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import {Message} from 'element-ui'
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
-const router = new Router({
-    routes: [
-        {
-            path: '/',
-            name: 'home',
-            meta: {requiresAuth: false},
-            component: () => import('./views/Home.vue')
-        },
-        {
-            path: '/login',
-            name: 'login',
-            meta: {requiresAuth: false},
-            component: () => import('./views/Login.vue')
-        },
-        {
-            path: '/user/info',
-            name: 'userInfo',
-            meta: {requiresAuth: true},
-            component: () => import('./views/user/UserInfo.vue')
-        }
-    ]
+const routes = [
+    {
+        path: '/',
+        name: 'home',
+        meta: {requiresAuth: false},
+        component: () => import('../views/Home.vue')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        meta: {requiresAuth: false},
+        component: () => import('../views/Login.vue')
+    },
+    {
+        path: '/user/info',
+        name: 'userInfo',
+        meta: {requiresAuth: true},
+        component: () => import('../views/user/UserInfo.vue')
+    }
+];
+
+const router = new VueRouter({
+    routes
 });
 
 router.beforeEach((to, from, next) => {
