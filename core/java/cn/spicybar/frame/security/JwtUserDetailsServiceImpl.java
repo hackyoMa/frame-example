@@ -42,7 +42,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
         } else {
             List<UserRole> userRoleList = userRoleRepository.findAllByUserId(user.getId());
             List<String> roleIdList = userRoleList.stream().map(UserRole::getRoleId).collect(Collectors.toList());
-            return new JwtUser(user.getId(), user.getUsername(), user.getPassword(), user.getLastLoginIp(), user.getLastPasswordResetTime(), roleRepository.findAllByIdIn(roleIdList));
+            return new JwtUser(user.getId(), user.getUsername(), user.getPassword(), user.getLastPasswordResetTime(), roleRepository.findAllByIdIn(roleIdList));
         }
     }
 

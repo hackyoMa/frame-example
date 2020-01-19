@@ -40,10 +40,6 @@ public class User implements Serializable {
     @Column(name = "password", length = 64)
     private String password;
 
-    @JSONField(name = "last_login_ip")
-    @Column(name = "last_login_ip", length = 15)
-    private String lastLoginIp;
-
     @JSONField(name = "last_password_reset_time")
     @Column(name = "last_password_reset_time")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -80,14 +76,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
-    }
-
-    public void setLastLoginIp(String lastLoginIp) {
-        this.lastLoginIp = lastLoginIp;
     }
 
     public Date getLastPasswordResetTime() {

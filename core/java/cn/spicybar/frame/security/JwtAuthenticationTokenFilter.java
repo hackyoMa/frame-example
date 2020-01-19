@@ -1,6 +1,5 @@
 package cn.spicybar.frame.security;
 
-import cn.spicybar.frame.util.GetIp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,7 +42,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
                 JwtUser user = (JwtUser) userDetails;
-                if (jwtTokenUtil.validateToken(authToken, GetIp.getUserIp(request), user.getLastLoginIp(), user.getLastPasswordResetTime())) {
+                if (jwtTokenUtil.validateToken(authToken, user.getLastPasswordResetTime())) {
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);

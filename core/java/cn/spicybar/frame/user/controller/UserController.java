@@ -3,7 +3,6 @@ package cn.spicybar.frame.user.controller;
 import cn.spicybar.frame.security.JwtUser;
 import cn.spicybar.frame.user.entity.User;
 import cn.spicybar.frame.user.service.UserService;
-import cn.spicybar.frame.util.GetIp;
 import cn.spicybar.frame.util.ParameterException;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,7 +39,7 @@ public class UserController {
      */
     @PostMapping(value = "/user/_login")
     public JSONObject login(@RequestBody JSONObject loginInfo) {
-        return userService.login(loginInfo, GetIp.getUserIp(request));
+        return userService.login(loginInfo);
     }
 
     /**
@@ -54,7 +53,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             throw new ParameterException(bindingResult);
         } else {
-            return userService.register(user, GetIp.getUserIp(request));
+            return userService.register(user);
         }
     }
 
@@ -110,7 +109,7 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping(value = "/user/_refresh-token")
     public JSONObject refreshToken(@RequestHeader("Authorization") String authorization) {
-        return userService.refreshToken(authorization, GetIp.getUserIp(request));
+        return userService.refreshToken(authorization);
     }
 
 }

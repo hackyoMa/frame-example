@@ -17,15 +17,13 @@ public class JwtUser implements UserDetails {
     private String id;
     private String username;
     private String password;
-    private String lastLoginIp;
     private Date lastPasswordResetTime;
     private Collection<? extends GrantedAuthority> authorities;
 
-    JwtUser(String id, String username, String password, String lastLoginIp, Date lastPasswordResetTime, Collection<? extends GrantedAuthority> authorities) {
+    JwtUser(String id, String username, String password, Date lastPasswordResetTime, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.lastLoginIp = lastLoginIp;
         this.lastPasswordResetTime = lastPasswordResetTime;
         this.authorities = authorities;
     }
@@ -42,10 +40,6 @@ public class JwtUser implements UserDetails {
     @Override
     public String getPassword() {
         return password;
-    }
-
-    public String getLastLoginIp() {
-        return lastLoginIp;
     }
 
     public Date getLastPasswordResetTime() {

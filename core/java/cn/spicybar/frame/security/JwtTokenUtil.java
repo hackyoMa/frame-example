@@ -112,13 +112,11 @@ public class JwtTokenUtil implements Serializable {
      * 验证令牌有效性
      *
      * @param token                 令牌
-     * @param currentIp             用户当前登录IP
-     * @param lastLoginIp           用户最后登录IP
      * @param lastPasswordResetTime 用户最后修改密码时间
      * @return 是否有效
      */
-    public Boolean validateToken(String token, String currentIp, String lastLoginIp, Date lastPasswordResetTime) {
-        return new Date().before(getClaims(token).getExpiration()) && currentIp.equals(lastLoginIp) && lastPasswordResetTime.before(getCreatedTime(token));
+    public Boolean validateToken(String token, Date lastPasswordResetTime) {
+        return new Date().before(getClaims(token).getExpiration()) && lastPasswordResetTime.before(getCreatedTime(token));
     }
 
 }

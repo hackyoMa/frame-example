@@ -50,7 +50,7 @@ public class UserService {
         this.userRoleRepository = userRoleRepository;
     }
 
-    public JSONObject login(JSONObject loginInfo, String currentIp) {
+    public JSONObject login(JSONObject loginInfo) {
         JSONObject re = new JSONObject();
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginInfo.getString("username"), loginInfo.getString("password"));
         try {
@@ -62,7 +62,6 @@ public class UserService {
             return re;
         }
         User user = userRepository.findUserByUsername(loginInfo.getString("username"));
-        user.setLastLoginIp(currentIp);
         userRepository.save(user);
         re.put("status", "success");
         re.put("token", TOKEN_HEAD + jwtTokenUtil.generateToken(jwtUserDetailsService.loadUserByUsername(user.getUsername())));
@@ -70,7 +69,7 @@ public class UserService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public JSONObject register(User user, String currentIp) {
+    public JSONObject register(User user) {
         JSONObject re = new JSONObject();
         if (StringUtils.isEmpty(user.getUsername()) || StringUtils.isEmpty(user.getPassword())) {
             re.put("status", "error");
@@ -84,7 +83,6 @@ public class UserService {
         }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         user.setLastPasswordResetTime(new Date());
-        user.setLastLoginIp(currentIp);
         user = userRepository.save(user);
         UserRole userRole = new UserRole();
         userRole.setUserId(user.getId());
@@ -116,12 +114,12 @@ public class UserService {
         return new BCryptPasswordEncoder().matches(password, oldUser.getPassword());
     }
 
-    public JSONObject refreshToken(String oldToken, String currentIp) {
+    public JSONObject refreshToken(String oldToken) {
         JSONObject re = new JSONObject();
         String token = oldToken.substring("Bearer ".length());
         String username = jwtTokenUtil.getUsernameFromToken(token);
         JwtUser user = (JwtUser) jwtUserDetailsService.loadUserByUsername(username);
-        if (jwtTokenUtil.validateToken(token, currentIp, user.getLastLoginIp(), user.getLastPasswordResetTime())) {
+        if (jwtTokenUtil.validateToken(token, user.getLastPasswordResetTime())) {
             re.put("status", "success");
             re.put("token", TOKEN_HEAD + jwtTokenUtil.refreshToken(token));
             return re;
