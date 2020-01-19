@@ -2,7 +2,7 @@
 
 ------
 
-基于：java、spring boot2.2.x、vue-cli4.x
+基于：java、spring boot2.x、vue-cli4.x
 
 依赖：
 > * jdk8、jdk11测试通过，通过修改根目录下pom文件中java.version即可
