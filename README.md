@@ -2,11 +2,11 @@
 
 ------
 
-基于：java、spring boot2.1.x、vue-cli3.x
+基于：java、spring boot2.2.x、vue-cli3.x
 
 依赖：
 > * jdk8、jdk11测试通过，通过修改根目录下pom文件中java.version即可
-> * 多数据库支持，通过修改pom.xml中的jdbc依赖，以及application.yml文件中spring.datasource.driver-class-name、spring.jpa.database-platform、spring.jpa.database即可
+> * 多种数据库支持，通过修改pom.xml中的jdbc依赖，以及application.yml文件中spring.datasource.driver-class-name、spring.jpa.database-platform、spring.jpa.database即可
 > * 首次运行样例需要在启动后向数据库导入脚本，core/resources/import.sql
 
 特性：

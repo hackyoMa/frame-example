@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.7.RELEASE</version>
+        <version>2.2.3.RELEASE</version>
         <relativePath/>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <groupId>cn.spicybar.frame</groupId>
+    <groupId>cn.spicybar</groupId>
     <artifactId>frame</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>frame</name>
     <description>Convenient development framework</description>
 
     <properties>
         <java.version>1.8</java.version>
-        <fastjson.version>1.2.59</fastjson.version>
+        <fastjson.version>1.2.62</fastjson.version>
         <jjwt.version>0.10.7</jjwt.version>
-        <druid.version>1.1.20</druid.version>
+        <druid.version>1.1.21</druid.version>
     </properties>
 
     <modules>
@@ -86,6 +85,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
