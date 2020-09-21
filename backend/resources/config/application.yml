@@ -1,0 +1,56 @@
+server:
+  port: 8080
+  shutdown: graceful
+  servlet:
+    context-path: /frame-example
+spring:
+  application:
+    name: frame-example
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+      asyncInit: true
+      validation-query: select 1
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*
+        profile-enable: true
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: druid
+        login-password: druid
+        reset-enable: true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: mysql
+    generate-ddl: true
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    open-in-view: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+security.whitelist:
+  post: /user,/user/_login,/user/_check-username-exists
