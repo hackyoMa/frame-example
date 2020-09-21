@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * UserRepository
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, String> {

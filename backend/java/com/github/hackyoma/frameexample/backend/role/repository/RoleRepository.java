@@ -10,7 +10,7 @@ import java.util.List;
  * RoleRepository
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {

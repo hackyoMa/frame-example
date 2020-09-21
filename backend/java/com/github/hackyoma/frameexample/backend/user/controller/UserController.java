@@ -1,33 +1,28 @@
 package com.github.hackyoma.frameexample.backend.user.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.hackyoma.frameexample.backend.security.JwtUser;
 import com.github.hackyoma.frameexample.backend.user.entity.User;
 import com.github.hackyoma.frameexample.backend.user.service.UserService;
 import com.github.hackyoma.frameexample.backend.util.ParameterException;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * UserController
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
-@CrossOrigin
 @RestController
 public class UserController {
 
-    private HttpServletRequest request;
-    private UserService userService;
+    private final UserService userService;
 
-    public UserController(HttpServletRequest request, UserService userService) {
-        this.request = request;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -37,7 +32,7 @@ public class UserController {
      * @param loginInfo 用户登录信息
      * @return 操作结果或Token
      */
-    @PostMapping(value = "/user/_login")
+    @PostMapping("/user/_login")
     public JSONObject login(@RequestBody JSONObject loginInfo) {
         return userService.login(loginInfo);
     }
@@ -48,7 +43,7 @@ public class UserController {
      * @param user 用户信息
      * @return 注册结果
      */
-    @PostMapping(value = "/user")
+    @PostMapping("/user")
     public JSONObject register(@Validated @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new ParameterException(bindingResult);
@@ -63,7 +58,7 @@ public class UserController {
      * @return 用户信息
      */
     @PreAuthorize("hasRole('ROLE_USER')")
-    @GetMapping(value = "/user")
+    @GetMapping("/user")
     public User getUser() {
         return userService.getUserById(((JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
@@ -72,7 +67,7 @@ public class UserController {
      * 更新用户信息
      */
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PutMapping(value = "/user")
+    @PutMapping("/user")
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user, ((JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
@@ -83,7 +78,7 @@ public class UserController {
      * @param username 用户名
      * @return 用户名是否存在
      */
-    @PostMapping(value = "/user/_check-username-exists")
+    @PostMapping("/user/_check_username_exists")
     public boolean checkUsernameExists(@RequestBody JSONObject username) {
         return userService.checkUsernameExists(username.getString("username"));
     }
@@ -95,7 +90,7 @@ public class UserController {
      * @return 原密码是否正确
      */
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PostMapping(value = "/user/_valid-password")
+    @PostMapping("/user/_valid_password")
     public boolean validPassword(@RequestBody JSONObject password) {
         return userService.validPassword(password.getString("password"), ((JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId());
     }
@@ -107,7 +102,7 @@ public class UserController {
      * @return 新Token
      */
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PostMapping(value = "/user/_refresh-token")
+    @PostMapping("/user/_refresh_token")
     public JSONObject refreshToken(@RequestHeader("Authorization") String authorization) {
         return userService.refreshToken(authorization);
     }

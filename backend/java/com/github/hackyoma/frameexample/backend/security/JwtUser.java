@@ -7,18 +7,18 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * 安全用户实体类
+ * JWT用户
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 public class JwtUser implements UserDetails {
 
-    private String id;
-    private String username;
-    private String password;
-    private Date lastPasswordResetTime;
-    private Collection<? extends GrantedAuthority> authorities;
+    private final String id;
+    private final String username;
+    private final String password;
+    private final Date lastPasswordResetTime;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     JwtUser(String id, String username, String password, Date lastPasswordResetTime, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;

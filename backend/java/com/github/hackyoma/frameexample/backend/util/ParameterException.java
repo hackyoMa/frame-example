@@ -6,11 +6,11 @@ import org.springframework.validation.BindingResult;
  * 自定义参数异常
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 public class ParameterException extends RuntimeException {
 
-    private BindingResult bindingResult;
+    private final BindingResult bindingResult;
 
     public ParameterException(BindingResult bindingResult) {
         this.bindingResult = bindingResult;

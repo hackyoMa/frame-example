@@ -15,7 +15,7 @@ import java.util.Date;
  * User
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Entity(name = "user")
 public class User implements Serializable {
@@ -27,17 +27,17 @@ public class User implements Serializable {
     private String id;
 
     @NotEmpty(message = "请输入注册昵称")
-    @Length(min = 1, max = 16, message = "昵称长度必须在1-16位之间")
-    @Column(name = "nickname", length = 64)
+    @Length(min = 1, max = 20, message = "昵称长度必须在1-20位之间")
+    @Column(name = "nickname", length = 20)
     private String nickname;
 
     @Pattern(regexp = "[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]+$|1\\d{10}$", message = "邮箱或手机号格式不正确")
-    @Length(min = 5, max = 32, message = "邮箱长度必须在5-32位之间")
+    @Length(min = 5, max = 64, message = "邮箱长度必须在5-64位之间")
     @Column(name = "username", length = 64, unique = true)
     private String username;
 
-    @Pattern(regexp = "^(?![^a-zA-Z]+$)(?!\\D+$).{8,64}$", message = "密码长度必须在8-64位之间，且必须包含数字和字母")
-    @Column(name = "password", length = 64)
+    @Pattern(regexp = "^(?![^a-zA-Z]+$)(?!\\D+$).{8,128}$", message = "密码长度必须在8-128位之间，且必须包含数字和字母")
+    @Column(name = "password", length = 128)
     private String password;
 
     @JSONField(name = "last_password_reset_time")

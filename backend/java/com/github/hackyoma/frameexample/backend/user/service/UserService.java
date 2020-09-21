@@ -1,5 +1,6 @@
 package com.github.hackyoma.frameexample.backend.user.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.hackyoma.frameexample.backend.role.entity.UserRole;
 import com.github.hackyoma.frameexample.backend.role.repository.RoleRepository;
 import com.github.hackyoma.frameexample.backend.role.repository.UserRoleRepository;
@@ -8,7 +9,6 @@ import com.github.hackyoma.frameexample.backend.security.JwtUser;
 import com.github.hackyoma.frameexample.backend.security.JwtUserDetailsServiceImpl;
 import com.github.hackyoma.frameexample.backend.user.entity.User;
 import com.github.hackyoma.frameexample.backend.user.repository.UserRepository;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -26,25 +26,21 @@ import java.util.Date;
  * UserService
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Service
 public class UserService {
 
-    private final static String TOKEN_HEAD = "Bearer ";
-
-    private AuthenticationManager authenticationManager;
-    private JwtUserDetailsServiceImpl jwtUserDetailsService;
-    private JwtTokenUtil jwtTokenUtil;
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private UserRoleRepository userRoleRepository;
+    private final AuthenticationManager authenticationManager;
+    private final JwtUserDetailsServiceImpl jwtUserDetailsService;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRoleRepository userRoleRepository;
 
     @Autowired
-    public UserService(AuthenticationManager authenticationManager, JwtUserDetailsServiceImpl jwtUserDetailsService, JwtTokenUtil jwtTokenUtil, UserRepository userRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository) {
+    public UserService(AuthenticationManager authenticationManager, JwtUserDetailsServiceImpl jwtUserDetailsService, UserRepository userRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository) {
         this.authenticationManager = authenticationManager;
         this.jwtUserDetailsService = jwtUserDetailsService;
-        this.jwtTokenUtil = jwtTokenUtil;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.userRoleRepository = userRoleRepository;
@@ -64,7 +60,7 @@ public class UserService {
         User user = userRepository.findUserByUsername(loginInfo.getString("username"));
         userRepository.save(user);
         re.put("status", "success");
-        re.put("token", TOKEN_HEAD + jwtTokenUtil.generateToken(jwtUserDetailsService.loadUserByUsername(user.getUsername())));
+        re.put("token", JwtTokenUtil.TOKEN_HEADER + JwtTokenUtil.generateToken(jwtUserDetailsService.loadUserByUsername(user.getUsername())));
         return re;
     }
 
@@ -117,11 +113,11 @@ public class UserService {
     public JSONObject refreshToken(String oldToken) {
         JSONObject re = new JSONObject();
         String token = oldToken.substring("Bearer ".length());
-        String username = jwtTokenUtil.getUsernameFromToken(token);
+        String username = JwtTokenUtil.getUsernameFromToken(token);
         JwtUser user = (JwtUser) jwtUserDetailsService.loadUserByUsername(username);
-        if (jwtTokenUtil.validateToken(token, user.getLastPasswordResetTime())) {
+        if (JwtTokenUtil.validateToken(token, user.getLastPasswordResetTime())) {
             re.put("status", "success");
-            re.put("token", TOKEN_HEAD + jwtTokenUtil.refreshToken(token));
+            re.put("token", JwtTokenUtil.TOKEN_HEADER + JwtTokenUtil.refreshToken(token));
             return re;
         }
         re.put("status", "error");

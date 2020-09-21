@@ -15,17 +15,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 用户验证方法
+ * 用户验证
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Service
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private UserRoleRepository userRoleRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRoleRepository userRoleRepository;
 
     @Autowired
     public JwtUserDetailsServiceImpl(UserRepository userRepository, RoleRepository roleRepository, UserRoleRepository userRoleRepository) {
@@ -38,7 +38,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("username_not_found");
+            throw new UsernameNotFoundException("Username does not exist");
         } else {
             List<UserRole> userRoleList = userRoleRepository.findAllByUserId(user.getId());
             List<String> roleIdList = userRoleList.stream().map(UserRole::getRoleId).collect(Collectors.toList());

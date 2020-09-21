@@ -10,7 +10,7 @@ import java.util.List;
  * UserRoleRepository
  *
  * @author 13712
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Repository
 public interface UserRoleRepository extends JpaRepository<UserRole, String> {

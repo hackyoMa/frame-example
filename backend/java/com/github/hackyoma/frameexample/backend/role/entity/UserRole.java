@@ -13,7 +13,7 @@ import java.io.Serializable;
  * UserRole
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Entity(name = "user_role")
 public class UserRole implements Serializable {

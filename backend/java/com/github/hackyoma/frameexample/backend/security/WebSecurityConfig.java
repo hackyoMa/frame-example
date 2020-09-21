@@ -20,21 +20,21 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * 安全配置
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final JwtUserDetailsServiceImpl jwtUserDetailsService;
+    private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
+    private final EntryPointUnauthorizedHandler entryPointUnauthorizedHandler;
+    private final RestAccessDeniedHandler restAccessDeniedHandler;
+    private final PasswordEncoder passwordEncoder;
+
     @Value("#{'${security.whitelist.post}'.split(',')}")
     private String[] postWhitelist;
-
-    private JwtUserDetailsServiceImpl jwtUserDetailsService;
-    private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-    private EntryPointUnauthorizedHandler entryPointUnauthorizedHandler;
-    private RestAccessDeniedHandler restAccessDeniedHandler;
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public WebSecurityConfig(JwtUserDetailsServiceImpl jwtUserDetailsService, JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter, EntryPointUnauthorizedHandler entryPointUnauthorizedHandler, RestAccessDeniedHandler restAccessDeniedHandler) {
@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().cors().and().authorizeRequests()
+                .and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
                 .antMatchers(HttpMethod.GET, "/**/*.css", "/**/*.js", "/**/*.htm", "/**/*.html",

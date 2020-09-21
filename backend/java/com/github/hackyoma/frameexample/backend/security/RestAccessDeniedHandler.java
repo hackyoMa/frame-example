@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletResponse;
  * 自定义403返回值
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Component
 public class RestAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) {
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         response.setStatus(403);
     }
 

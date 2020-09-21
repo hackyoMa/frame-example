@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * Role
  *
  * @author hackyo
- * @version V1.0.0
+ * @date 2018/8/22
  */
 @Entity(name = "role")
 public class Role implements GrantedAuthority {
@@ -23,7 +23,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "id", length = 36)
     private String id;
 
-    @Column(name = "name", length = 64, unique = true)
+    @Column(name = "name", length = 100, unique = true)
     private String name;
 
     @Column(name = "description", length = 500)
