@@ -1,5 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/frame-example?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
-    username: frame-example
-    password: frame-example

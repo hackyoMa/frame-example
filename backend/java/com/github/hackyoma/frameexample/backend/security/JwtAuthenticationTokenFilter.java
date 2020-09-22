@@ -47,7 +47,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
                 }
             }
         }
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
         chain.doFilter(request, response);
     }
 

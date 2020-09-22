@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.hackyoma.frameexample.backend.security.JwtUser;
 import com.github.hackyoma.frameexample.backend.user.entity.User;
 import com.github.hackyoma.frameexample.backend.user.service.UserService;
-import com.github.hackyoma.frameexample.backend.util.ParameterException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
@@ -46,7 +45,7 @@ public class UserController {
     @PostMapping("/user")
     public JSONObject register(@Validated @RequestBody User user, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            throw new ParameterException(bindingResult);
+            return new JSONObject().fluentPut("status", "error").fluentPut("message", bindingResult.getSuppressedFields());
         } else {
             return userService.register(user);
         }
