@@ -61,6 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers("/druid/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/").permitAll()
                 .antMatchers(HttpMethod.GET, "/**/*.css", "/**/*.js", "/**/*.htm", "/**/*.html",
                         "/**/*.xhtml", "/**/*.woff", "/**/*.woff2", "/**/*.ttf",
@@ -69,8 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.webp", "/**/*.swf", "/**/*.pdf", "/**/*.mp3",
                         "/**/*.wav", "/**/*.avi").permitAll()
                 .antMatchers(HttpMethod.POST, postWhitelist).permitAll()
-                .anyRequest().authenticated()
-                .and().headers().cacheControl();
+                .anyRequest().authenticated();
         httpSecurity.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         httpSecurity.exceptionHandling().authenticationEntryPoint(entryPointUnauthorizedHandler).accessDeniedHandler(restAccessDeniedHandler);
     }

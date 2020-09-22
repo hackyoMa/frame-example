@@ -28,12 +28,9 @@ spring:
       validation-query: select 1
       web-stat-filter:
         enabled: true
-        url-pattern: /*
-        exclusions: /druid/*
         profile-enable: true
       stat-view-servlet:
         enabled: true
-        url-pattern: /druid/*
         login-username: druid
         login-password: druid
         reset-enable: true
@@ -53,4 +50,4 @@ management:
     health:
       show-details: always
 security.whitelist:
-  post: /user,/user/_login,/user/_check-username-exists
+  post: /user,/user/_login,/user/_check_username_exists

@@ -33,6 +33,12 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+        String allowHeaders = request.getHeader("Access-Control-Request-Headers");
+        if (StringUtils.isEmpty(allowHeaders)) {
+            allowHeaders = "*";
+        }
+        response.setHeader("Access-Control-Allow-Headers", allowHeaders);
         String authHeader = request.getHeader("Authorization");
         if (!StringUtils.isEmpty(authHeader) && authHeader.startsWith(JwtTokenUtil.TOKEN_HEADER)) {
             String authToken = authHeader.substring(JwtTokenUtil.TOKEN_HEADER.length());
