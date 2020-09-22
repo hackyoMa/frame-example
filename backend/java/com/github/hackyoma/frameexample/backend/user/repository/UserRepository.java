@@ -30,10 +30,10 @@ public interface UserRepository extends JpaRepository<User, String> {
     User findUserByUsername(String username);
 
     /**
-     * 根据用户名判断是否已存在用户
+     * 判断用户名是否存在
      *
      * @param username 用户名
-     * @return 是否已存在用户
+     * @return 用户名是否存在
      */
     boolean existsUserByUsername(String username);
 
