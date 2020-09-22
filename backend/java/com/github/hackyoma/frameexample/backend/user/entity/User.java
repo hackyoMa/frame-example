@@ -26,7 +26,7 @@ public class User implements Serializable {
     @Column(name = "id", length = 36)
     private String id;
 
-    @NotEmpty(message = "请输入注册昵称")
+    @NotEmpty(message = "请输入昵称")
     @Length(min = 1, max = 20, message = "昵称长度必须在1-20位之间")
     @Column(name = "nickname", length = 20, nullable = false)
     private String nickname;

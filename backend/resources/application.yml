@@ -36,7 +36,7 @@ spring:
         reset-enable: true
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     database: mysql
     generate-ddl: true
     database-platform: org.hibernate.dialect.MySQL57Dialect

@@ -38,7 +38,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException("Username does not exist");
+            throw new UsernameNotFoundException("用户不存在");
         } else {
             List<UserRole> userRoleList = userRoleRepository.findAllByUserId(user.getId());
             List<String> roleIdList = userRoleList.stream().map(UserRole::getRoleId).collect(Collectors.toList());
