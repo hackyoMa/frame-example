@@ -25,11 +25,11 @@ public class UserRole implements Serializable {
     private String id;
 
     @JSONField(name = "user_id")
-    @Column(name = "user_id", length = 36)
+    @Column(name = "user_id", length = 36, nullable = false)
     private String userId;
 
     @JSONField(name = "role_id")
-    @Column(name = "role_id", length = 36)
+    @Column(name = "role_id", length = 36, nullable = false)
     private String roleId;
 
     public String getId() {

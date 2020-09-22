@@ -23,7 +23,7 @@ public class Role implements GrantedAuthority {
     @Column(name = "id", length = 36)
     private String id;
 
-    @Column(name = "name", length = 100, unique = true)
+    @Column(name = "name", length = 100, nullable = false, unique = true)
     private String name;
 
     @Column(name = "description", length = 500)
